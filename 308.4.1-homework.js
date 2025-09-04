@@ -156,8 +156,27 @@ console.log(tableAsObjects);
 // Calculate the average age of the group 
 
 // Making a for loop to loop through all the ages
-// I know the age column is at index 3 so maybe I need to set my for loop from there? 
+// testing how to target a certain key value inside of an object that is inside of a loop
+// ie. in this example, age of 111 from Biblo's object inside the index array of 4
+console.log(tableAsObjects[4].Age);
 
-for (let i = 3; i < tableAsObjects.length; i++) {
- 
+// making an empty array tp store all the ages 
+let allAges = [];
+
+// basic set up for the loop
+for (let i = 0; i < tableAsObjects.length; i++) {
+    // prints out all the rows again
+    let rows = tableAsObjects[i];
+    console.log(rows);
+
+    // Number() should convert all the strings values into integers
+    let numAge = Number(rows[3]);
+    // verifying the row was converted inot a number value 
+    console.log(typeof numAge);
+
+    allAges.push(numAge);
+
+
 }
+
+console.log(allAges);
