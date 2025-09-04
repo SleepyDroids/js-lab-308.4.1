@@ -83,7 +83,7 @@ console.log(`${twoDimensionalTable[3][1]} is the absolute best at Marvel Rivals!
   ["63", "Blaine", "Quiz Master", "58"],
   ["98", "Bill", "Doctor’s Assistant", "26"] ];
 
-// PART 3: Transforming Data
+// ✨ PART 3: Transforming Data
 
 // convert each array of data into an object per person basically
 // and have the titles be the keys for each value
@@ -93,21 +93,71 @@ console.log(`${twoDimensionalTable[3][1]} is the absolute best at Marvel Rivals!
 let titles = twoDimensionalTable[0];
 // console.log(titles); // making sure I'm only grabbing the titles with this variable
 
-// creating a new EMPTY array to hold the objects
+// creating a new EMPTY array to hold the objects once they're converted
 const tableAsObjects = [];
 
-    // starting at index 1 to skip the header row, loop only through the data arrays, i++ means going row by row
+    // starting at index 1 to skip the header row, loop only through the row arrays, i++ means going row by row
 for (let i = 1; i < twoDimensionalTable.length; i++) {
     let currentRow = twoDimensionalTable[i]; //starts at 1
     // setting a variable to create a new object for each row it loops through
     let rowAsObject = {};
 
+    // now I think I need to go through the columns so a new inner loop ?? 
+    for (let j = 0; j < titles.length; j++) {
+        // title[j] refers to the titles for reach column so it is my KEYs name (pulls from my titles variable since it's an array)
+        // currentRow[j] refers to the value of each column (all the data after the titles)
+        // setting up the titles as keys and the rows [each array] as values
+        // console.log(currentRow[j]);
+        rowAsObject[titles[j]] = currentRow[j];
+        // making sure it's grabbing only the data and not the titles
+        // console.log(rowAsObject[titles[j]]);
+        // to clarify the for loop is iterating through each header and each row
+        // so it makes each object one piece at at time (ie. at the start it is {ID: "42"} and then {ID: "42", Name: "Bruce"} etc.)
+        // it is printing out each key (the titles) and pairing it with the value
+        // then I think once one full NEW object is printed it goes back to the outer loop
+        // which is then creating a new object for the new row of data and repeating the process over again
+    }
 
-    
+    // i need to add the objects to the array I defined earlier 
+    // use the push() method since tableAsObjects is an array
+    // I pass the rowAsObjects from the outer loop as an argument since each object should be printed at this point bc of the inner loop
+    // and this is the final step of the outer loop once the inner loop is completely done going through the .length
+    // and therefore registerting as false
+    tableAsObjects.push(rowAsObject);
+
 }
 
-// me testing something from MDN
-// let objData = Object.fromEntries(twoDimensionalTable);
-// console.log(objData);
+console.log(tableAsObjects);
+// friendly reminder to myself that tableAsObjects in an array filled with objects
 
+// ✨ PART 4: Sorting and Manipulating Data
 
+// Remove the last element from the sorted array
+// pop() removes an element at the end of an array so it should remove an entire object
+// in this case I need to kill Bill 
+let killBill = tableAsObjects.pop();
+console.log(killBill);
+
+// verifying I've killed Bill 
+console.log(tableAsObjects);
+
+// Insert the following at index 1: { id: "48", name: "Barry", occupation: "Runner", age: "25" }
+// using splice() to add the new object at index 1, indicated by 1, 0 (nothing to be deleted), {object to be added goes here} inside the splice() method
+tableAsObjects.splice(1, 0, { ID: "48", Name: "Barry", Occupation: "Runner", Age: "25" });
+
+console.log(tableAsObjects);
+
+// Add the following object to the end of the array: { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+let backToTheShire = { ID: "7", Name: "Bilbo", Occupation: "None", Age: "111" };
+tableAsObjects.push(backToTheShire);
+
+console.log(tableAsObjects);
+
+// Calculate the average age of the group 
+
+// Making a for loop to loop through all the ages
+// I know the age column is at index 3 so maybe I need to set my for loop from there? 
+
+for (let i = 3; i < tableAsObjects.length; i++) {
+ 
+}
