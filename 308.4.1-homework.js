@@ -2,7 +2,7 @@
 // Homework Assignment for: 308.4.1
 // https://www.canva.com/design/DAFxumk-vR0/VYKb17-6iKqVOD5NOVsidA/edit
 
-// I tend to make a lot of comments as I code to make sure I understand what I am doing at each step
+// I tend to make a lot of comments as I code to make sure I understand what I am doing at each step aka rubber duck debugging
 // so please be prepared for many many MANY comments as I'm learning 
 
 // ✨ PART 1: Refactoring Old Code (starting fresh for reference, will go back to the earlier lab at a later time)
@@ -72,7 +72,7 @@ console.log(csvTable);
 let twoDimensionalTable = csvTable;
 console.log(twoDimensionalTable); // checking I've stored the variable correctly
 // I want to log out the name "Blaine" to make sure it is working
-console.log(`${twoDimensionalTable[3][1]} is the absolute best at Marvel Rivals!`);
+// console.log(`${twoDimensionalTable[3][1]} is the absolute best at Marvel Rivals!`);
 // had to get a little silly with it and to see if I could index data in the 2D array correctly
 
 // visual representation of my two dimensional array: 
@@ -134,18 +134,18 @@ console.log(tableAsObjects);
 
 // Remove the last element from the sorted array
 // pop() removes an element at the end of an array so it should remove an entire object
-// in this case I need to kill Bill 
+// in this case I need to Kill Bill (don't sue me Tarantino)
 let killBill = tableAsObjects.pop();
 console.log(killBill);
 
 // verifying I've killed Bill 
-console.log(tableAsObjects);
+// console.log(tableAsObjects);
 
 // Insert the following at index 1: { id: "48", name: "Barry", occupation: "Runner", age: "25" }
 // using splice() to add the new object at index 1, indicated by 1, 0 (nothing to be deleted), {object to be added goes here} inside the splice() method
 tableAsObjects.splice(1, 0, { ID: "48", Name: "Barry", Occupation: "Runner", Age: "25" });
 
-console.log(tableAsObjects);
+// console.log(tableAsObjects);
 
 // Add the following object to the end of the array: { id: "7", name: "Bilbo", occupation: "None", age: "111" }
 let backToTheShire = { ID: "7", Name: "Bilbo", Occupation: "None", Age: "111" };
@@ -158,25 +158,69 @@ console.log(tableAsObjects);
 // Making a for loop to loop through all the ages
 // testing how to target a certain key value inside of an object that is inside of a loop
 // ie. in this example, age of 111 from Biblo's object inside the index array of 4
-console.log(tableAsObjects[4].Age);
+// console.log(tableAsObjects[4].Age);
 
-// making an empty array tp store all the ages 
-let allAges = [];
+// making an empty array to store all the ages 
+// let allAges = [];
 
-// basic set up for the loop
+// // basic set up for the loop
+// for (let i = 0; i < tableAsObjects.length; i++) {
+//     // prints out all the rows again
+//     let rows = tableAsObjects[i];
+//     console.log(rows);
+
+//     // Number() should convert all the strings values into integers
+//     let numAge = Number(rows[3]);
+//     // verifying the row was converted inot a number value 
+//     console.log(typeof numAge);
+
+//     allAges.push(numAge);
+// }
+
+// console.log(allAges); // kept returning as NaN -- will figure out after completing part 5
+
+// ✨ PART 5: Full circle 
+
+// As a final task, transform the final set of data back into CSV format:
+// ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26
+
+// Going to grab my keys or titles since I want them to be converted back into a string 
+
+                                    // this is the array where the titles at index 0 are stored
+const titlesToString = Object.keys(tableAsObjects[0]);
+// console.log(titlesToString);
+
+// using the array method join() that creates and RETURNS a new string, separating the elements by ","
+let ogString = titlesToString.join(",");
+// console.log(ogString);
+
+// now I need to grab the data from the objects aka iterate over them using a for loop 
 for (let i = 0; i < tableAsObjects.length; i++) {
-    // prints out all the rows again
-    let rows = tableAsObjects[i];
-    console.log(rows);
+    // placing all the objects inside a tableObj variable since I need to loop through each one
+    let tableObj = tableAsObjects[i];
+    // going to need to push the objects (each row) so should declare and assign a variable to an empty array
+    let rowArr = [];
 
-    // Number() should convert all the strings values into integers
-    let numAge = Number(rows[3]);
-    // verifying the row was converted inot a number value 
-    console.log(typeof numAge);
+    // I need to go through the titles again to get the values attached to the keys? 
+    // so another inner loop to retrieve the value from tableObj and store it in empty array above (outer loop)
+    // bc the inner loop retrieves the values in the order of the titles 
+    // visual example of how it should loop: ["42", "Bruce", "Knight", "41"] (title order from left to right)
+                                            // ID.  Name.   Occupation.  Age. 
 
-    allAges.push(numAge);
+    for (let j = 0; j < titlesToString.length; j++) {
+        // titlesToString.length refers to the titles variable above that is holding all my keys
+        let keys = titlesToString[j]; // using j to rummage through my keys
+        // I want to push to my rowArr
+        rowArr.push(tableObj[keys]);
 
+    }
+
+    // this is where I need to concatenate my titles and my row data together from the two loops
+    ogString += rowArr.join(",");
 
 }
+console.log(`This is the original string, kind of: 
+${ogString}`);
 
-console.log(allAges);
+
+
