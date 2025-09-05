@@ -151,7 +151,7 @@ tableAsObjects.splice(1, 0, { ID: "48", Name: "Barry", Occupation: "Runner", Age
 let backToTheShire = { ID: "7", Name: "Bilbo", Occupation: "None", Age: "111" };
 tableAsObjects.push(backToTheShire);
 
-console.log(tableAsObjects);
+// console.log(tableAsObjects);
 
 // Calculate the average age of the group 
 
@@ -161,23 +161,32 @@ console.log(tableAsObjects);
 // console.log(tableAsObjects[4].Age);
 
 // making an empty array to store all the ages 
-// let allAges = [];
+let allAges = [];
 
-// // basic set up for the loop
-// for (let i = 0; i < tableAsObjects.length; i++) {
-//     // prints out all the rows again
-//     let rows = tableAsObjects[i];
-//     console.log(rows);
+// basic set up for the loop
+for (let i = 0; i < tableAsObjects.length; i++) {
+    // prints out all the rows again
+    let rows = tableAsObjects[i].Age;
+    // console.log(rows);
 
-//     // Number() should convert all the strings values into integers
-//     let numAge = Number(rows[3]);
-//     // verifying the row was converted inot a number value 
-//     console.log(typeof numAge);
+    // Number() should convert all the strings values into integers
+    let numAge = Number(rows);
+    console.log(numAge);
+    // verifying the row was converted inot a number value 
 
-//     allAges.push(numAge);
-// }
+    allAges.push(numAge);
+}
 
-// console.log(allAges); // kept returning as NaN -- will figure out after completing part 5
+console.log(allAges); // this is a new array of all the ages as integers
+
+let ageSum = 0; 
+for (let i = 0; i < allAges.length; i++) {
+    ageSum += allAges[i];
+    // console.log(ageSum);
+    let avg = ageSum / allAges.length; // .length should be 5 to keep it dynamic instead of hard coding 5
+    console.log(avg);
+}
+
 
 // ✨ PART 5: Full circle 
 
@@ -221,8 +230,8 @@ for (let i = 0; i < tableAsObjects.length; i++) {
     ogString += rowArr.join(",");
 
 }
-console.log(`This is the original string, kind of: 
-${ogString}`);
+// console.log(`This is the original string, kind of: 
+// ${ogString}`);
 
 
 
