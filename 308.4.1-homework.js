@@ -215,7 +215,9 @@ for (let i = 0; i < tableAsObjects.length; i++) {
 
     }
 
-    // this is where I need to concatenate my titles and my row data together from the two loops
+    // this is where I need to concatenate my titles and my row data together from the two loops (+=)
+    // using the .join() method again on the array (rowArr) that is holding all the object data as the now new arrays
+    // so it's adding each one to ogString variable
     ogString += rowArr.join(",");
 
 }
